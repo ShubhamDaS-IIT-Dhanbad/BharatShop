@@ -1,16 +1,18 @@
 
-.home-page-category-products-container-parent{
+.home-page-featured-products-container-parent{
     display: flex;flex-direction: column;width: 100vw;
     justify-content: center;align-items: center;
-    margin-top: 80px 0px 50px 0px ;gap: 40px;  
+  gap: 18px; 
+  margin-bottom: 120px;
+
 }
-.home-page-category-products-container {
+.home-page-featured-products-container {
     display: flex;
     flex-direction: column;
     width: 100vw;
 }
 
-.home-page-category-products {
+.home-page-featured-products {
     font-weight: bolder;
     display: flex;
     flex-direction: row;
@@ -20,7 +22,7 @@
     padding: 0 4% 0px 4%;
     width: 100%;
 
-    .home-page-category-products-left {
+    .home-page-featured-products-left {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -28,13 +30,13 @@
         font-size: 23px;
         font-weight: bolder;
 
-        .shop-by-category-name-bar {
+        .shop-by-featured-name-bar {
             width: 100%;
             height: 2px;
             background-color: #7469B6;
         }
 
-        .shop-by-category-name-ball {
+        .shop-by-featured-name-ball {
             width: 18px;
             position: relative;
             bottom: 5px;
@@ -45,21 +47,21 @@
     }
 }
 
-.home-page-category-products-right {
-    display: flex;
-    gap: 5px;
-    justify-self: center;
+.featured-products-right {
+    display: flex;align-items: center;
+    justify-content: center;gap: 15px;
+    width: 90%;
 }
 
-.home-page-category-products-span {
+.home-page-featured-products-span {
     flex-grow: 1;
 }
 
-.home-page-category-products-button {
-    height: 30px;
-    width: 50px;
+.featured-products-button {
+    height: 40px;
+    width: 100px;
     border: none;
-    background-color: #090909;
+    background-color: #171414;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -67,14 +69,14 @@
 }
 
 
-.slider-container {
+.featured-product-slider-container {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
-.sliderParent {
+.featured-product-sliderParent {
     width: 90%;
     padding-left: 33px;
 }

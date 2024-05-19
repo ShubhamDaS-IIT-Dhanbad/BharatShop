@@ -22,7 +22,7 @@ export const fetchShopDetails = createAsyncThunk(
 const shopSlice = createSlice({
   name: 'shop',
   initialState: {
-    shopDetails: null,
+    shopDetails: [],
     loading: false,
     error: null
   },

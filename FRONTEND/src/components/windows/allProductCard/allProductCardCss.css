@@ -1,5 +1,5 @@
 .all-product-card {
-    background-color: rgb(224, 255, 255);
+    background-color: rgb(255, 224, 224);
     width: 195px;
     display: flex;
     flex-direction: column;
@@ -22,6 +22,9 @@
     height: 100%;
     width: 100%;
     border-radius: 4px;
+    &&:hover{
+        cursor: pointer;
+    }
 }
 
 

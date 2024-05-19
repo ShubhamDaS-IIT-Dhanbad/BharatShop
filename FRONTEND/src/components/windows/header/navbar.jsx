@@ -1,28 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import "./navbarCss.css"
-
+import "./navbarCss.css";
 import { Link, useNavigate } from 'react-router-dom';
 import { FaShoppingCart, FaCloudversify, FaSearch } from "react-icons/fa";
 import { FaBarsStaggered } from "react-icons/fa6";
-
 import { useDispatch, useSelector } from 'react-redux';
-import { setIsAuthenticated} from '../../../redux/features/logInLogout/authenticationSlice.jsx';
-import {setUser} from '../../../redux/features/userData/userDataSlice.jsx';
+import { setIsAuthenticated } from '../../../redux/features/logInLogout/authenticationSlice.jsx';
+import { searchedProducts } from '../../../redux/features/products/productSlics.jsx';
+import { setUser } from '../../../redux/features/userData/userDataSlice.jsx';
 
 function Navbar() {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
+    const [searchQuery, setSearchQuery] = useState('');
     const [userData, setUserData] = useState({ fullName: "Guest" });
     const [isLoading, setIsLoading] = useState(false);
     const [menu, setMenu] = useState("");
-    const navigate = useNavigate();
 
     const { isAuthenticated } = useSelector(state => state.Authentication);
-    // const {userData} = useSelector(state => state.user);
-    // if(isAuthenticated){
-    //     setUserData(user);
-    //     setIsLoading(true);
-    // }
+
     useEffect(() => {
         dispatch(setIsAuthenticated());
         dispatch(setUser());
@@ -41,6 +37,24 @@ function Navbar() {
         fetchData();
     }, [isAuthenticated]);
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            dispatch(searchedProducts(searchQuery));
+            navigate(`/search/${searchQuery}`);
+            console.log("Search initiated by Enter key for:", searchQuery);
+        }
+    };
+
+    const submitButton = () => {
+        dispatch(searchedProducts(searchQuery));
+        navigate(`/search/${searchQuery}`);
+        console.log("Search initiated by button click for:", searchQuery);
+    };
+
+    const handleInputChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
+
     return (
         <>
             <div id='navbar-front-block'></div>
@@ -51,21 +65,23 @@ function Navbar() {
                         <p><Link to="/" className="link-properties">Bharat | Shop</Link></p>
                     </div>
 
-
                     <div className="search-box">
-                        <div id='FaSearch'><FaSearch id='FaSearch' /></div>
-                        <input id='input-search' type="search" placeholder='Search for products, brands, and more' />
+                        <button id='FaSearch' onClick={submitButton}><FaSearch id='FaSearchIcon' /></button>
+                        <input id='input-search' type="search"
+                            placeholder='Search for products, brands, and more'
+                            value={searchQuery}
+                            onChange={handleInputChange}
+                            onKeyDown={handleKeyDown} />
                         <div className='pincode-container'>
                             {isLoading && isAuthenticated && (
                                 <>
-                                    {userData.pinCodes.map((pinCode, index) => (
+                                    {userData?.pinCodes?.map((pinCode, index) => (
                                         <div className='pin-code-list' key={index}>{pinCode}+</div>
                                     ))}
                                 </>
                             )}
                         </div>
                     </div>
-
 
                     <ul className='nav-menu-right'>
                         {isAuthenticated ? (
@@ -77,7 +93,7 @@ function Navbar() {
                                     </Link>
                                 </li>
                                 <li id="logged-in-div-2">
-                                    <Link to="/cart" className="link-properties" >
+                                    <Link to="/cart" className="link-properties">
                                         <FaShoppingCart id='FaShoppingCart' />
                                         <div id='nav-cart-count' style={{ display: "none" }}>5</div>
                                     </Link>
@@ -106,15 +122,15 @@ function Navbar() {
                         {menu === "PRODUCTS" && <div className='nav-menu-left-hr-line' style={{ backgroundColor: "#59adf6" }}></div>}
                     </li>
                     <li onClick={() => setMenu("MEN")}>
-                        <Link className="link-properties">MEN</Link>
+                        <Link className="link-properties" to="/category/men">MEN</Link>
                         {menu === "MEN" && <div className='nav-menu-left-hr-line' style={{ backgroundColor: "#5c3c92" }}></div>}
                     </li>
                     <li onClick={() => setMenu("WOMEN")}>
-                        <Link className="link-properties">WOMEN</Link>
+                        <Link className="link-properties" to="/category/women">WOMEN</Link>
                         {menu === "WOMEN" && <div className='nav-menu-left-hr-line' style={{ backgroundColor: "#42d6a4" }}></div>}
                     </li>
                     <li onClick={() => setMenu("KIDS")}>
-                        <Link className="link-properties">KIDS</Link>
+                        <Link className="link-properties" to="/category/kids">KIDS</Link>
                         {menu === "KIDS" && <div className='nav-menu-left-hr-line' style={{ backgroundColor: "#d9138a" }}></div>}
                     </li>
                     <li onClick={() => setMenu("RETAILER")}>
@@ -130,11 +146,11 @@ function Navbar() {
                         {menu === "TESTIMONIAL" && <div className='nav-menu-left-hr-line' style={{ backgroundColor: "#9d94ff" }}></div>}
                     </li>
                     <li onClick={() => setMenu("CONTACT")}>
-                        <Link className="link-properties">CONTACT</Link>
+                        <Link className="link-properties" to="/contact">CONTACT</Link>
                         {menu === "CONTACT" && <div className='nav-menu-left-hr-line' style={{ backgroundColor: "#c780e8" }}></div>}
                     </li>
                 </ul>
-            </div >
+            </div>
         </>
     );
 }

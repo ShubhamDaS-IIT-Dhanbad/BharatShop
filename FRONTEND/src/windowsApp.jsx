@@ -1,79 +1,67 @@
-import React from 'react';
-import { useLocation, BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState, useEffect, lazy } from 'react'
-import axios from 'axios'
+import React, { lazy, Suspense } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './components/windows/header/navbar.jsx';
+import Hidenavbar from './components/windows/header/hideNavbar.jsx';
+import Footer from './components/windows/footer/footer.jsx';
+import Hidefooter from './components/windows/footer/hideFooter.jsx';
+import Loading from './components/windows/loading/loading.jsx';
+import AuthRouteWrapper from './utils/AuthRouteWrapper.jsx';
 
-import Userauth from './utils/userAuth.jsx'
-import AuthRouteWrapper from './utils/AuthRouteWrapper.jsx'
+const Home = lazy(() => import('./pages/windows/home/home.jsx'));
+const SingleProduct = lazy(() => import('./pages/windows/singleProduct/singleProduct.jsx'));
+const Products = lazy(() => import('./pages/windows/products/product.jsx'));
+const Account = lazy(() => import('./pages/windows/user/user.jsx'));
+const Login = lazy(() => import('./components/windows/login/login.jsx'));
+const Signup = lazy(() => import('./components/windows/signup/signuppage.jsx'));
+const PageNotFound = lazy(() => import('./components/windows/pageNotFound/pageNotFound.jsx'));
+const CategoryPage = lazy(() => import('./components/windows/CategoryPage/CategoryPage.jsx'));
+const SearchPage = lazy(() => import('./components/windows/searchPage/searchPage.jsx'));
+const ContactPage = lazy(() => import('./components/windows/contactPage/contactPage.jsx'));
 
-import Navbar from './components/windows/header/navbar.jsx'
-import Hidenavbar from './components/windows/header/hideNavbar.jsx'
+const ROUTES = {
+  HOME: '/',
+  ACCOUNT: '/account',
+  LOGIN: '/login',
+  SIGNUP: '/signup',
+  PRODUCTS: '/products',
+  CATEGORY: '/category/:category',
+  CONTACT: '/contact',
+  SEARCH:'/search/:keyword',
+  PRODUCT: '/product/:productId',
+  PAGE_NOT_FOUND: '*'
+};
 
-import Footer from './components/windows/footer/footer.jsx'
-import Hidefooter from './components/windows/footer/hideFooter.jsx'
+const ErrorBoundary = ({ children }) => {
+  return <>{children}</>;
+};
 
-import Account from './pages/windows/user/user.jsx'
-
-import Login from './components/windows/login/login.jsx'
-import Signup from './components/windows/signup/signuppage.jsx'
-
-import PageNotFound from './components/windows/pageNotFound/pageNotFound.jsx'
-
-import { useDispatch, useSelector } from 'react-redux';
-
-const Home = lazy(() => import('./pages/windows/home/home.jsx'))
-import SingleProduct from './pages/windows/singleProduct/singleProduct.jsx'
-import Products from './pages/windows/products/product.jsx'
-
-import { fetchProducts,setFilteredProducts } from './redux/features/products/productSlics.jsx';
-import { setIsAuthenticated} from './redux/features/logInLogout/authenticationSlice.jsx';
-import {setUser} from './redux/features/userData/userDataSlice.jsx';
-
-const Windowsapp = React.memo(() => {
-  const dispatch = useDispatch();
-  const { loading } = useSelector(state => state.products);
-  
-  useEffect(() => {
-    dispatch(fetchProducts()); 
-    dispatch(setFilteredProducts());
-    dispatch( setUser());
-    dispatch( setIsAuthenticated());
-  }, [dispatch]);
-  if ("geolocation" in navigator) {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const latitude = position.coords.latitude;
-        const longitude = position.coords.longitude;
-        console.log("Latitude:", latitude);
-        console.log("Longitude:", longitude);
-      },
-      (error) => {
-        console.error("Error getting location:", error);
-        // Handle error here
-      }
-    );
-  } else {
-    console.log("Geolocation is not supported by this browser.");
-  }
-  
+const WindowsApp = () => {
   return (
-    
-    <>
-      <Router>
-        <Hidenavbar><Navbar /></Hidenavbar>
+    <Router>
+      <Hidenavbar>
+        <Navbar />
+      </Hidenavbar>
+      <ErrorBoundary>
+        <Suspense fallback={<Loading />}>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/account' element={<AuthRouteWrapper element={<Account />} />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/:productId' element={<SingleProduct />} />
-          <Route path='/products' element={<Products />} />
-          <Route path='*' element={<PageNotFound />} />
-        </Routes>
-        <Hidefooter><Footer></Footer></Hidefooter>
-      </Router>
-    </>
-  )
-  });
+            <Route path={ROUTES.HOME} element={<Home />} />
+            <Route path={ROUTES.ACCOUNT} element={<AuthRouteWrapper element={<Account />} />} />
+            <Route path={ROUTES.LOGIN} element={<Login />} />
+            <Route path={ROUTES.SIGNUP} element={<Signup />} />
+            <Route path={ROUTES.PRODUCTS} element={<Products />} />
+            <Route path={ROUTES.CATEGORY} element={<CategoryPage />} />
+            <Route path={ROUTES.CONTACT} element={<ContactPage />} />
+            <Route path={ROUTES.SEARCH} element={<SearchPage />} />
+            <Route path={ROUTES.PRODUCT} element={<SingleProduct />} />
+            <Route path={ROUTES.PAGE_NOT_FOUND} element={<PageNotFound />} />
+          </Routes>
+        </Suspense>
+      </ErrorBoundary>
+      <Hidefooter>
+        <Footer />
+      </Hidefooter>
+    </Router>
+  );
+};
 
-export default Windowsapp
+export default WindowsApp;

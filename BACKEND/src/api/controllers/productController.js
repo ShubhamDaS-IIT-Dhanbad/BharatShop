@@ -26,19 +26,10 @@ const createProduct = asyncHandler(async (req, res, next) => {
   });
 });
 
+
+
 // Get All Product
 const getAllProducts = asyncHandler(async (req, res, next) => {
-  const { category} = req.query;
-
-  // Construct the query object based on the received parameters
-  const query = {};
-  if (category) {
-    query.category = category;
-  }
-
- 
-
-
 
   const resultPerPage = 16;
   const productsCount = await Product.countDocuments();
@@ -47,11 +38,12 @@ const getAllProducts = asyncHandler(async (req, res, next) => {
     .search()
     .filter()
     .filterByPincode()
+    .pagination(resultPerPage)
+    .filterByCategory()
 
-  let products = await apiFeature.query;
-  let filteredProductsCount = products.length;
-  apiFeature.pagination(resultPerPage);
 
+  const products = await apiFeature.query;
+  const filteredProductsCount = products.length;
   res.status(200).json({
     success: true,
     products,
@@ -60,6 +52,8 @@ const getAllProducts = asyncHandler(async (req, res, next) => {
     filteredProductsCount,
   });
 });
+
+
 // Get All Product retailer
 const getRetailerProducts = asyncHandler(async (req, res, next) => {
   const products = await Product.find();
@@ -75,7 +69,6 @@ const getProductDetails = asyncHandler(async (req, res, next) => {
   if (!product) {
     return next(new ApiError("Product not found", 404));
   }
-
   res.status(200).json({
     success: true,
     product,

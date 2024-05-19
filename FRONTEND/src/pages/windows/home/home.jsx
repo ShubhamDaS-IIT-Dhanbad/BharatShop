@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 // import { fetchHomePageData } from '../../../redux/actions/homeActions'; 
@@ -10,17 +10,19 @@ import ShopByCategory from '../../../components/windows/shopByCategory/shopByCat
 import HomePageProducts from "../../../components/windows/homePageProducts/homePageProducts.jsx";
 import Loading from "../../../components/windows/loading/loading.jsx";
 import FeaturedProduct from "../../../components/windows/featuredProduct/featuredProduct.jsx"
+import { fetchProducts } from '../../../redux/features/products/productSlics.jsx'
 
-import b1 from './b1.png';
-import b2 from './newsletter.png';
+import b2 from './b1.png';
 
 import men from "./categoryImages/mens.jpg";
 import women from "./categoryImages/women.webp";
 import electronics from "./categoryImages/electronics.jpg";
 import jewelery from "./categoryImages/jewelery.png";
 
-
 const Home = () => {
+  const dispatch = useDispatch();
+  const { products, loading: loadingProducts, error } = useSelector(state => state.products);
+  const [loading,setLoading]=useState(true)
   const data = [
     { id: 1, url: men },
     { id: 2, url: women },
@@ -33,45 +35,33 @@ const Home = () => {
     { id: 3, category: "backcover" },
     { id: 4, category: "electronics" }
   ];
-  const { products, loading: loadingProducts } = useSelector(state => state.products);
 
-  // const dispatch = useDispatch();
-  // const { loading, error } = useSelector(state => state.homePage);
-  const loading = false;
-  const error = false; 
   useEffect(() => {
-    // dispatch(fetchHomePageData());
-    window.scrollTo({
-      top: 0,
-      behavior: 'instant',
-    });
-  }, []);
+    const userDataString = localStorage.getItem('userData');
+    const userData = userDataString ? JSON.parse(userDataString) : null;
+    const pinCodesString = userData ? userData.pinCodes.join(', ') : "";
+    const pinCode = pinCodesString?pinCodesString:""; 
+    dispatch(fetchProducts({pinCode}));
+    setLoading(false);
+  }, [dispatch]);
 
+  if (loadingProducts && loading) return <Loading />;
+  if (error) return <div>Error: {error.message}</div>;
   return (
     <div id='home-div-container'>
       <Helmet>
         <title>Bharat|Shop</title>
         <meta name="description" content="Description of your home page" />
       </Helmet>
-      {loading ? (
-        <Loading />
-      ) : error ? (
-        <div>Error: {error.message}</div> 
-      ) : (
-        <>
-          <div id='home-div'>
-            <Carousal />
-            <ShopByCategory data={data} />
-            <HomePageProducts categories={categories} products={products} loading={loadingProducts} />
-            <Banner imageUrl={b2}/>
-            <FeaturedProduct products={products} loading={loadingProducts} />
-          </div>
-        </>
-      )}
+      <div id='home-div'>
+        <Carousal />
+        <ShopByCategory data={data} />
+        <HomePageProducts categories={categories} products={products} loading={loadingProducts} />
+        <Banner imageUrl={b2}/>
+        <FeaturedProduct products={products} loading={loadingProducts} />
+      </div>
     </div>
   );
 };
 
 export default Home;
-
-

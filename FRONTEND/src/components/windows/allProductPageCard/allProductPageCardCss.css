@@ -1,45 +1,77 @@
-/* AllProductPageCard.css */
-
-/* Container for the product section */
-.product-container {
+.all-product-page-container {
   display: flex;
   flex-direction: row;
-  gap: 20px;
-  justify-content: center;
-  padding: 50px 50px 100px 50px; /* Top, Right, Bottom, Left padding */
+  gap: 30px;
+  justify-content: space-evenly;
+  padding: 20px;margin-bottom: 200px;
 }
 
-/* Grid layout for the product cards */
-.product-grid {
+.all-product-page-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr)); /* 4 columns */
-  grid-gap: 20px; /* Gap between grid items */
-  overflow: hidden; /* Hide overflow */
+  flex-grow: 1;
+  grid-template-columns: repeat(4, minmax(0, 1fr)); 
+  grid-gap: 20px;
 }
-.all-product-container{
+
+.all-product-page-content {
   display: flex;
-  flex-direction: column;align-items: center;
-}
-/* Additional styling for the all-product section */
-.all-product {
-  width: 75%; /* Adjust width as needed */
+  flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
-/* Style for the "View More" button */
-.view-more-button {
-  width: 50%;
-  margin-top: 20px; /* Add margin to separate button from products */
-  padding: 10px 20px; /* Add padding for button size */
-  font-size: 16px; /* Adjust font size */
-  background-color: #0056b3; /* Button background color */
-  color: #fff; /* Button text color */
-  border: none; /* Remove button border */
-  border-radius: 20px; /* Add border radius for button */
-  box-shadow: rgba(66, 65, 65, 0.3) 0px 19px 38px, rgba(173, 154, 154, 0.12) 0px 15px 12px;
-  cursor: pointer; /* Change cursor to pointer on hover */
+.all-product-page-empty-message, .all-product-page-error-message {
+  font-size: 18px;
+  color: #555;
+  text-align: center;
+  margin-top: 20px;
 }
-.view-more-button:hover {
-  background-color: #0f1112;
-  scale:1.05; /* Change background color on hover */
+
+.all-product-page-pagination-buttons {
+  display: flex;
+  padding: 0 10px;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.all-product-page-pagination-button {
+  width: 100px;
+  height: 45px;
+  padding: 10px 0; 
+  font-size: 16px;
+  background-color: #000000; 
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  box-shadow: rgba(66, 65, 65, 0.3) 0px 19px 38px, rgba(173, 154, 154, 0.12) 0px 15px 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.all-product-page-pagination-button:hover {
+  background-color: #ffffff;
+  color: #000000;
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .all-product-page-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .all-product-page-pagination-button {
+    width: 50%;
+  }
+}
+
+@media (max-width: 480px) {
+  .all-product-page-grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .all-product-page-pagination-button {
+    width: 70%;
+  }
 }

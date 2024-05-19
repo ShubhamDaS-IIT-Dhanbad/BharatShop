@@ -25,5 +25,5 @@ app.use("/api/v1/account", userRouter)
 // routes declaration----retailer
 app.use("/api/v1/retailer", retailerRouter)
 app.use("/api/v1/shop", shopRouter)
-app.use("/api/v1/shop", productRouter)
+app.use("/api/v1/product", productRouter)
 export {app}

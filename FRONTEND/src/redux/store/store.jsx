@@ -6,7 +6,7 @@ import setFilteredProducts from "../features/products/productSlics.jsx";
 import setIsAuthenticated from "../features/logInLogout/authenticationSlice.jsx";
 import setUser from "../features/userData/userDataSlice.jsx";
 import clearUser from "../features/userData/userDataSlice.jsx"; 
-import productDetailSlice from "../features/products/productDetailSlice.jsx"; 
+import product from "../features/products/productSlics.jsx"; 
 import shop from "../features/shop/shopSlice.jsx"; 
 const store=configureStore ({
     reducer:{
@@ -15,7 +15,7 @@ const store=configureStore ({
         products: productReducer,
         setFilteredProducts,
         user:setUser,clearUser,
-        productDetail:productDetailSlice,
+        product,
         shop,
     }
 })

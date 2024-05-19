@@ -8,7 +8,7 @@ function ProductCard({ id, image, title, price }) {
     const navigate = useNavigate();
     return (
         <div className="all-product-card">
-            <div className='all-product-card-top' onClick={() => navigate(`/${id}`)}>
+            <div className='all-product-card-top' onClick={() => navigate(`/product/${id}`)}>
                 <img className="all-product-image" src={image} alt="product" />
 
             </div>

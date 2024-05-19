@@ -16,6 +16,7 @@
     height: 67%;padding: 0;margin: o;
     width: 87%;
     transition: all ease 1s;
+    &&:hover{cursor: pointer;}
 }
 .product-card-top-image {
     height: 200px;

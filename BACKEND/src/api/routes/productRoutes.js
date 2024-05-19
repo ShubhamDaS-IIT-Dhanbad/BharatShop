@@ -7,7 +7,8 @@ const router = Router();
 
 // Secure routes
 router.route("/addproduct").post(upload.array('images'), createProduct); // Ensure that 'images' matches the field name in your form
-router.route("/products").get(getAllProducts);
+router.route("/products/").get(getAllProducts);
+router.route("/search/products/:keyword").get(getAllProducts);
 router.route("/productsdetail/:id").get(getProductDetails);
 router.route("/retailerproducts").get(getRetailerProducts);
 

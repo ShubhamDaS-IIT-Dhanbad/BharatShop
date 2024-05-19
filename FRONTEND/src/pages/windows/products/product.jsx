@@ -3,14 +3,17 @@ import AllProductPageCard from '../../../components/windows/allProductPageCard/a
 import { Helmet } from 'react-helmet';
 import './productCss.css';
 
+import {useSelector } from 'react-redux';
+
 const Product = () => {
+  
+  const { products, loading, error } = useSelector(state => state.products);
   useEffect(() => {
-    // Scroll to the top when the component mounts
     window.scrollTo({
       top: 0,
-      behavior:'instant', // Use smooth scrolling behavior
+      behavior:'instant',
     });
-  }, []); // Empty dependency array ensures it runs only once when the component mounts
+  }, []);
 
 
   return (
@@ -19,7 +22,7 @@ const Product = () => {
         <title>Product Page</title>
         <meta name="description" content="Description of your product page" />
       </Helmet>
-      <AllProductPageCard />
+      <AllProductPageCard products={products} loading={loading} error={error}/>
     </div>
   );
 }
