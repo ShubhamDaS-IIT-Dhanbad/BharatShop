@@ -1,5 +1,5 @@
 .all-product-card {
-    background-color: rgb(255, 224, 224);
+    background-color: rgb(234, 242, 252);
     width: 195px;
     display: flex;
     flex-direction: column;
@@ -10,7 +10,10 @@
     z-index: 3;
     overflow: hidden;
     padding: 10px 10px 15px 10px;
+    &:hover{
+        scale: 1.05;
     box-shadow: rgba(108, 104, 104, 0.16) 0px 3px 6px, rgba(170, 161, 161, 0.23) 0px 3px 6px;
+    }
 }
 
 .all-product-card-top {

@@ -1,6 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import todoReducer from "../features/todoSlice.jsx";
 import productReducer from "../features/products/productSlics.jsx";
 import setFilteredProducts from "../features/products/productSlics.jsx";
 import setIsAuthenticated from "../features/logInLogout/authenticationSlice.jsx";

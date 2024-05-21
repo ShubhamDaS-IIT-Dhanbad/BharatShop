@@ -20,9 +20,9 @@ import retailerRouter from './src/api/routes/retailerRoutes.js'
 import productRouter from './src/api/routes/productRoutes.js'
 import shopRouter from './src/api/routes/shopRoutes.js'
 
-// routes declaration----user
+
 app.use("/api/v1/account", userRouter)
-// routes declaration----retailer
+
 app.use("/api/v1/retailer", retailerRouter)
 app.use("/api/v1/shop", shopRouter)
 app.use("/api/v1/product", productRouter)

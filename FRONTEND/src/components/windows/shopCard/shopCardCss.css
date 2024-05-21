@@ -1,0 +1,90 @@
+.product-card {
+  background-color: rgb(247, 234, 251);
+  width: 201px;
+  height: 320px; /* Changed height */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  overflow: hidden;
+  padding-top: 5px;
+  transition: all ease 0.3s; /* Added transition */
+}
+
+.product-card:hover {
+  transform: scale(1.05); /* Changed scale */
+  box-shadow: rgba(108, 104, 104, 0.16) 0px 3px 6px, rgba(170, 161, 161, 0.23) 0px 3px 6px;
+}
+
+.product-card-top {
+  height: 67%;
+  padding: 0;
+  margin: 0;
+  width: 87%;
+}
+
+.product-card-top:hover {
+  cursor: pointer;
+}
+
+.product-card-top-image {
+  height: 200px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.product-card-bottom {
+  height: 33%; /* Adjusted height */
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: #000000;
+}
+
+.product-shop-detail {
+  display: flex;
+  flex-direction: column;
+}
+
+.shoe-name {
+  font-size: 10px;
+  font-weight: bold; /* Corrected typo */
+}
+
+.product-card-shop-name-div {
+  display: flex;
+  flex-direction: column;
+  gap: 5px; /* Added gap */
+}
+
+.product-card-shop {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.product-card-shop-price {
+  padding-left: 2px;
+  display: flex;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+  font-size: 10px;
+  color: #707070;
+}
+
+.product-card-shop-name {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 100;
+  letter-spacing: 1;
+}
+
+.price_num {
+  font-size: 20px;
+  font-weight: bolder;
+}

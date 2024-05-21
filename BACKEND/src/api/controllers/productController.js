@@ -33,13 +33,13 @@ const getAllProducts = asyncHandler(async (req, res, next) => {
 
   const resultPerPage = 16;
   const productsCount = await Product.countDocuments();
-
+console.log("ko")
   const apiFeature = new ApiFeatures(Product.find(), req.query)
     .search()
     .filter()
     .filterByPincode()
     .pagination(resultPerPage)
-    .filterByCategory()
+    .filterByCategoryProducts()
 
 
   const products = await apiFeature.query;

@@ -5,8 +5,7 @@ export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async ({ pinCode, category }) => {
     const categories = Array.isArray(category) ? category : [category];
-    const categoriesString = categories.join(',');
-    const response = await fetch(`http://localhost:12000/api/v1/product/products?pincode=${pinCode}&categories=${categoriesString}`);
+    const response = await fetch(`http://localhost:12000/api/v1/product/products?pincode=${pinCode}&categories=${categories}`);
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }
@@ -14,7 +13,7 @@ export const fetchProducts = createAsyncThunk(
     return products.products;
   }
 );
-
+//fetch product detail by id
 export const fetchProductDetails = createAsyncThunk(
   'product/fetchProductDetails',
   async (productId) => {
@@ -26,7 +25,7 @@ export const fetchProductDetails = createAsyncThunk(
     return productDetail.product;
   }
 );
-
+//search products
 export const searchedProducts = createAsyncThunk(
   'products/searchedProducts',
   async (keywords) => {

@@ -1,7 +1,6 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
-// import { fetchHomePageData } from '../../../redux/actions/homeActions'; 
 import './homeCss.css';
 
 import Carousal from '../../../components/windows/carousal/carousal.jsx';
@@ -11,6 +10,7 @@ import HomePageProducts from "../../../components/windows/homePageProducts/homeP
 import Loading from "../../../components/windows/loading/loading.jsx";
 import FeaturedProduct from "../../../components/windows/featuredProduct/featuredProduct.jsx"
 import { fetchProducts } from '../../../redux/features/products/productSlics.jsx'
+
 
 import b2 from './b1.png';
 
@@ -22,13 +22,15 @@ import jewelery from "./categoryImages/jewelery.png";
 const Home = () => {
   const dispatch = useDispatch();
   const { products, loading: loadingProducts, error } = useSelector(state => state.products);
-  const [loading,setLoading]=useState(true)
+  const [loading, setLoading] = useState(true);
+
   const data = [
     { id: 1, url: men },
     { id: 2, url: women },
     { id: 3, url: electronics },
     { id: 4, url: jewelery }
   ];
+
   const categories = [
     { id: 1, category: "mobile" },
     { id: 2, category: "tshirt" },
@@ -37,16 +39,20 @@ const Home = () => {
   ];
 
   useEffect(() => {
+    // Scroll to the top of the page when the component mounts
+    window.scrollTo(0, 0);
+
     const userDataString = localStorage.getItem('userData');
     const userData = userDataString ? JSON.parse(userDataString) : null;
     const pinCodesString = userData ? userData.pinCodes.join(', ') : "";
-    const pinCode = pinCodesString?pinCodesString:""; 
-    dispatch(fetchProducts({pinCode}));
+    const pinCode = pinCodesString ? pinCodesString : "";
+    dispatch(fetchProducts({ pinCode }));
     setLoading(false);
   }, [dispatch]);
 
   if (loadingProducts && loading) return <Loading />;
   if (error) return <div>Error: {error.message}</div>;
+
   return (
     <div id='home-div-container'>
       <Helmet>
@@ -57,7 +63,7 @@ const Home = () => {
         <Carousal />
         <ShopByCategory data={data} />
         <HomePageProducts categories={categories} products={products} loading={loadingProducts} />
-        <Banner imageUrl={b2}/>
+        <Banner imageUrl={b2} />
         <FeaturedProduct products={products} loading={loadingProducts} />
       </div>
     </div>

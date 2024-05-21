@@ -3,12 +3,13 @@
   flex-direction: row;
   gap: 30px;
   justify-content: center;
-  padding: 20px;margin-bottom: 200px;
+  padding: 20px;
+  margin-bottom: 200px;
 }
 
 .all-product-page-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr)); 
+  grid-template-columns: repeat(3, minmax(0, 1fr)); 
   grid-gap: 20px;
 }
 

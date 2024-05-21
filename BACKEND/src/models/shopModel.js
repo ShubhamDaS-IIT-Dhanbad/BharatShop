@@ -1,6 +1,15 @@
 import mongoose, {Schema} from "mongoose";
 
 const shopSchema = new Schema({
+    description:{
+        type:String
+    },
+    shopStatus:{
+        type:Boolean
+    },
+    image:{
+        type:[String]
+    },
     phoneNumber:{
         type: String,
         required: true
@@ -10,6 +19,10 @@ const shopSchema = new Schema({
     },
     shopName:{
         type: String,
+        required: true
+    },
+    category:{
+        type: [String],
         required: true
     },
     pinCodes: {

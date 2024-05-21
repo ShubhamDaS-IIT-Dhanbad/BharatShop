@@ -1,15 +1,18 @@
 .product-card {
-    background-color: rgb(236, 228, 255);
-    width: 195px;width: 215px;
+    background-color: rgb(247, 234, 251);
+    width: 201px;height: 215px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 320px;
     border-radius: 4px;
-    z-index: 3;
+    z-index: 3;padding-top: 5px;
     overflow: hidden;
-    padding:10px;
+    &:hover{
+        scale: 1.05;
+    box-shadow: rgba(108, 104, 104, 0.16) 0px 3px 6px, rgba(170, 161, 161, 0.23) 0px 3px 6px;
+    }
 }
 
 .product-card-top {
@@ -26,7 +29,7 @@
 
 
 .product-card-bottom {
-    height: 45%;
+    height: 45%;padding: 10px;
     width: 100%;display: flex;flex-direction: column;
     justify-content: space-around;
     color: #000000;

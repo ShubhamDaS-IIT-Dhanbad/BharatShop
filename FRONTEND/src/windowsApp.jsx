@@ -17,6 +17,8 @@ const PageNotFound = lazy(() => import('./components/windows/pageNotFound/pageNo
 const CategoryPage = lazy(() => import('./components/windows/CategoryPage/CategoryPage.jsx'));
 const SearchPage = lazy(() => import('./components/windows/searchPage/searchPage.jsx'));
 const ContactPage = lazy(() => import('./components/windows/contactPage/contactPage.jsx'));
+const ShopPage = lazy(() => import('./pages/windows/shop/shopPage.jsx'));
+const SingleShop = lazy(() => import('./pages/windows/singleShop/singleShop.jsx'));
 
 const ROUTES = {
   HOME: '/',
@@ -28,6 +30,8 @@ const ROUTES = {
   CONTACT: '/contact',
   SEARCH:'/search/:keyword',
   PRODUCT: '/product/:productId',
+  SHOPS: '/shop',
+  SHOP: '/shop/:shopId',
   PAGE_NOT_FOUND: '*'
 };
 
@@ -52,8 +56,10 @@ const WindowsApp = () => {
             <Route path={ROUTES.CATEGORY} element={<CategoryPage />} />
             <Route path={ROUTES.CONTACT} element={<ContactPage />} />
             <Route path={ROUTES.SEARCH} element={<SearchPage />} />
-            <Route path={ROUTES.PRODUCT} element={<SingleProduct />} />
-            <Route path={ROUTES.PAGE_NOT_FOUND} element={<PageNotFound />} />
+            <Route path={ROUTES.PRODUCT} element={<SingleProduct />}/>
+            <Route path={ROUTES.SHOPS} element={<ShopPage />}/>
+            <Route path={ROUTES.SHOP} element={<SingleShop />}/>
+            <Route path={ROUTES.PAGE_NOT_FOUND} element={<PageNotFound />}/>
           </Routes>
         </Suspense>
       </ErrorBoundary>

@@ -11,17 +11,20 @@ function AllCategoryRootPages() {
 
   useEffect(() => {
     const storedUserData = JSON.parse(localStorage.getItem('userData'));
-    const pinCode = storedUserData ? storedUserData.pinCode : '';
+    const pinCode = storedUserData ? storedUserData.pinCodes: '';
     const categoriesArray = Array.isArray(category) ? category : [category];
     const categoriesString = categoriesArray.join(',');
-
+    console.log("ko",categoriesString)
     const fetchProducts = async () => {
+      
       try {
         const response = await fetch(`http://localhost:12000/api/v1/product/products?pincode=${pinCode}&categories=${categoriesString}`);
+        
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
         const products = await response.json();
+        console.log(products)
         setProductData(products.products);
         setLoading(false);
       } catch (error) {

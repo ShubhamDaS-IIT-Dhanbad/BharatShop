@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { fetchShop } from '../../../redux/features/shop/shopSlice';
 import BrandFilter from './sections/brandFilter.jsx';
 import CategoryFilter from './sections/categoryFilter.jsx';
-import './filterSectionCss.css';
+import './filterSectionShopCss.css';
 
 const FilterSectionShop = () => {
   const dispatch = useDispatch(); 

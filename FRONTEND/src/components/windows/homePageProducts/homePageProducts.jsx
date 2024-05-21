@@ -25,14 +25,22 @@ const HomePageCategoryProducts = ({ categories, products, loading }) => {
             {
                 breakpoint: 1024,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 2,
+                    slidesToShow: 4,
+                    slidesToScroll: 1,
                     infinite: true,
                     dots: true
                 }
             },
             {
-                breakpoint: 600,
+                breakpoint: 900,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 2,
+                    initialSlide: 2
+                }
+            },
+            {
+                breakpoint: 500,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
@@ -40,7 +48,7 @@ const HomePageCategoryProducts = ({ categories, products, loading }) => {
                 }
             },
             {
-                breakpoint: 480,
+                breakpoint: 200,
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1
@@ -75,7 +83,7 @@ const HomePageCategoryProducts = ({ categories, products, loading }) => {
 
                             <div className='slider-container'>
                                 <div className="row gx-1 sliderParent">
-                                    <Slider {...settings} ref={sliderRefs[index]}>
+                                    <Slider {...settings} ref={sliderRefs[index]} >
                                         {categoryProducts.map(product => (
                                             <div className='col-md-1 men-slider-columns' key={product.id}>
                                                 <ProductCard id={product._id} image={product.images[0]} title={product.title} price={product.price} />

@@ -89,7 +89,7 @@ function Navbar() {
                                 <li>
                                     <Link to="/account" id="logged-in-div-1" className="link-properties">
                                         <p id='welcome'>Welcome,</p>
-                                        <p id='user-name'>{userData.fullName.toUpperCase()}</p>
+                                        <p id='user-name'>{userData?.fullName?.toUpperCase()}</p>
                                     </Link>
                                 </li>
                                 <li id="logged-in-div-2">
@@ -138,7 +138,7 @@ function Navbar() {
                         {menu === "RETAILER" && <div className='nav-menu-left-hr-line' style={{ backgroundColor: "#ffb480" }}></div>}
                     </li>
                     <li onClick={() => setMenu("SHOP")}>
-                        <Link className="link-properties">SHOP</Link>
+                        <Link className="link-properties" to={"/shop"}>SHOP</Link>
                         {menu === "SHOP" && <div className='nav-menu-left-hr-line' style={{ backgroundColor: "red" }}></div>}
                     </li>
                     <li onClick={() => setMenu("TESTIMONIAL")}>

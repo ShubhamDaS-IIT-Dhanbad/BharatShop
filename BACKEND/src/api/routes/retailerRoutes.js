@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createShop } from '../controllers/shopController.js';
+import { registerShop} from '../controllers/shopController.js';
 
 import { registerRetailer,logInRetailer,logOutRetailer} from '../controllers/retailerController.js';
 // import { upload } from "../middleware/multerMiddleware.js"
@@ -13,7 +13,7 @@ router.route("/register").post(registerRetailer)
 router.route("/login").post(logInRetailer)
 
 //secure routes
-router.route("/add").post(createShop)
+router.route("/add").post( registerShop)
 router.route("/logout").post( retailerVerifyJwt,logOutRetailer)
 
 export default router

@@ -5,7 +5,7 @@ function Hidenavbar({children}) {
     const location=useLocation();
     const [shownavbar,setshownavbar]=useState(true)
     useEffect(()=>{
-        if(location.pathname=='/shop'){
+        if(location.pathname=='/retailer'){
             setshownavbar(false)
         }else{setshownavbar(true)}
     },[location])
